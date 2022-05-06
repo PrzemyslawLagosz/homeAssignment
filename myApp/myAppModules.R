@@ -1,28 +1,42 @@
 ### Select Module ###
 selectUI <- function(id) {
+  #' Select module UI
+  #' 
+  #' Generate 2 selectInputs with scientificName and vernacularName column
+  
   ns <- NS(id)
   tagList(
     box(width = NULL,
-        selectInput(ns("v_scientificName"), "Scientific Name", selected = NULL, choices = unique(occurence$scientificName), selectize=FALSE)
+        selectInput(ns("v_scientificName"), "Scientific Name", selected = NULL, choices = unique(choicesDF$scientificName), selectize=FALSE)
     ),
     box(width = NULL,
-        selectInput(ns("v_vernacularName"), "Vernacular Name ", selected = NULL, choices = unique(occurence$vernacularName), selectize=FALSE)
+        selectInput(ns("v_vernacularName"), "Vernacular Name ", selected = NULL, choices = unique(choicesDF$vernacularName), selectize=FALSE)
     )
   )
 }
 
 selectServer <- function(id) {
+  #' Select module Server
+  #'
+  #' It check with index is actually selected, and update each others to display position with same position
+  #' 
+  #' @return Returns currently selected vernacularName as a reactive value
+   
   moduleServer(id, function(input, output, session) {
-    # Order this alphabeticly
-    selectedIndex_scientificName <- reactive(which(occurence$scientificName == input$v_scientificName)[1])
-    selectedIndex_vernacularName <- reactive(which(occurence$vernacularName == input$v_vernacularName)[1])
+    
+    # To implement Server-side selectize
+    # updateSelectInput(inputId = "v_scientificName", choices = unique(choicesDF$scientificName))
+    # updateSelectInput(inputId = "v_vernacularName", choices = unique(choicesDF$vernacularName))
+    
+    selectedIndex_scientificName <- reactive(which(choicesDF$scientificName == input$v_scientificName)[1])
+    selectedIndex_vernacularName <- reactive(which(choicesDF$vernacularName == input$v_vernacularName)[1])
     
     observeEvent(input$v_scientificName, {
-      updateSelectInput(inputId = "v_vernacularName", selected = occurence$vernacularName[selectedIndex_scientificName()])
+      updateSelectInput(inputId = "v_vernacularName", selected = choicesDF$vernacularName[selectedIndex_scientificName()])
     })
     
     observeEvent(input$v_vernacularName, {
-      updateSelectInput(inputId = "v_scientificName", selected = occurence$scientificName[selectedIndex_vernacularName()])
+      updateSelectInput(inputId = "v_scientificName", selected = choicesDF$scientificName[selectedIndex_vernacularName()])
     })
     
     return(reactive(input$v_scientificName))
@@ -32,6 +46,7 @@ selectServer <- function(id) {
 
 ### Occurance Table Module ###
 tableUI <- function(id) {
+  #' Table module UI
   ns <- NS(id)
   tagList(
     box(width = NULL,
@@ -41,7 +56,15 @@ tableUI <- function(id) {
 }
 
 tableServer <- function(id, varFilter) {
+  #' Table module Server
+  #' 
+  #' It filter occurence DF, with curentlly selected vernacularName, group by contry, count number 
+  #' of occurencies selected vernacularName, and render table with top 5.
+  #' 
+  #' @param varFilter vernacularName returned by `selectServer()`
+  
   stopifnot(is.reactive(varFilter))
+  req(varFilter)
   moduleServer(id, function(input, output, session) {
     
     # DODAc OPIS
@@ -61,7 +84,9 @@ tableServer <- function(id, varFilter) {
 
 ### MAP MODULE ###
 mapUI <- function(id) {
+  #' Map module UI
   #' 
+  #' Box with a map
   ns <- NS(id)
   
   tagList(
@@ -72,6 +97,13 @@ mapUI <- function(id) {
 }
 
 mapServer <- function(id, varFilter) {
+  #' Map module Server
+  #' 
+  #' Filter occurrence DF with `varFilter`, and generate map with clustering markers 
+  #' described by `longitudeDecimal` and `latitudeDecimal` column
+  #' 
+  #' @param varFilter vernacularName returned by `selectServer()`
+ 
   stopifnot(is.reactive(varFilter))
   moduleServer(id, function(input, output, session) {
     output$map <- renderLeaflet({
@@ -92,6 +124,10 @@ mapServer <- function(id, varFilter) {
 
 ### Time Line MODULE ###
 timeLineUI <- function(id) {
+  #' Map module UI
+  #' 
+  #' Box with a timeLine plotlyOutput
+
   ns <- NS(id)
   
   tagList(
@@ -101,6 +137,17 @@ timeLineUI <- function(id) {
   )
 }
 timeLineServer <- function(id, varFilter) {
+  #' Map module Server
+  #' 
+  #' It filter occurence DF with `varFilter` and save as df.
+  #' Based on df it generate:
+  #' df_positions (with geom_points, and geom_segment coordinates for a timeline), 
+  #' df_month (with geom_text, contains only with months included in df + bufor months, one at the begging and at the end), 
+  #' df_year (with geom_text, contains only with years included in df + bufor months, one at the begging and at the end),
+  #' with `df_positions()`, `df_month()`, `df_year()`
+  #'
+  #' @param varFilter vernacularName returned by `selectServer()`
+  
   stopifnot(is.reactive(varFilter))
   moduleServer(id, function(input, output, session) {
     

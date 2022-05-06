@@ -5,6 +5,8 @@ library(tidyverse)
 library(ggplot2)
 library(plotly)
 library(lubridate)
+library(roxygen2)
+library(docstring)
 
 source("timeline_functions.R")
 source("myAppModules.R")
