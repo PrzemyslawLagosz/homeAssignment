@@ -35,7 +35,6 @@ for (k in c(1:59)) {
                       n_max = start, 
                       skip = skipCount,
                       col_names = colnames)
-  #colnames(temp_df) <- colnames
   
   temp_df <- temp_df %>%
     #select(id, occurrenceID, scientificName, vernacularName, longitudeDecimal, latitudeDecimal, eventDate, countryCode, country) %>%
@@ -62,3 +61,5 @@ colnames <- colnames(occuranceLite)
 
 write_csv(occuranceLite, "C:\\Users\\Przemo\\Documents\\R\\homeAssignment\\occuranceLite.csv")
 write_csv(occurancePL, "C:\\Users\\Przemo\\Documents\\R\\homeAssignment\\occurancePL.csv")
+
+occurence <- read_csv("occurenceLite.csv")
