@@ -33,6 +33,6 @@ body <- dashboardBody(
 
 ui <- dashboardPage(
   header,
-  dashboardSidebar(disable = FALSE, collapsed = TRUE),
+  dashboardSidebar(disable = TRUE, collapsed = TRUE),
   body
 )
