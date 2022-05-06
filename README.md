@@ -15,6 +15,7 @@ I projected only one test, located in [test-myAppModules.R script](https://githu
 
 ### Future development  
 * Add a dataRangeInput to filter markers on map, and points on time line.
+* Add a selectInput with choices from kingdom column to reduce choices shown at once in vernacularName and scientificName inputs.
 * Add a feature which allows users add their own observations. 
 
 #### Time Line

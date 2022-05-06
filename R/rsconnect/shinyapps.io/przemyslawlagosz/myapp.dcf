@@ -5,7 +5,7 @@ account: przemyslawlagosz
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6247533
-bundleId: 5877014
+bundleId: 5878256
 url: https://przemyslawlagosz.shinyapps.io/myapp/
-when: 1651833333.84245
-lastSyncTime: 1651833333.84245
+when: 1651853632.33095
+lastSyncTime: 1651853632.33095
