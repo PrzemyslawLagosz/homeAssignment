@@ -115,7 +115,12 @@ mapServer <- function(id, varFilter) {
         addTiles() %>%
         addMarkers(lng= ~longitudeDecimal, 
                    lat= ~latitudeDecimal, 
-                   popup = ~as.character(id), 
+                   popup = paste("ID:",data$id
+                                 , "<br>"
+                                 , "<a href='"
+                                 , data$occurrenceID
+                                 , "' target='_blank'>"
+                                 , "Click Here</a>"), 
                    clusterOptions = markerClusterOptions())
     })
   })
