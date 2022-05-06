@@ -117,10 +117,14 @@ mapServer <- function(id, varFilter) {
                    lat= ~latitudeDecimal, 
                    popup = paste("ID:",data$id
                                  , "<br>"
+                                 , "Details:"
                                  , "<a href='"
                                  , data$occurrenceID
                                  , "' target='_blank'>"
-                                 , "Click Here</a>"), 
+                                 , "Click Here</a>"
+                                 , "<br>"
+                                 , "Event Date:"
+                                 , data$eventDate), 
                    clusterOptions = markerClusterOptions())
     })
   })
