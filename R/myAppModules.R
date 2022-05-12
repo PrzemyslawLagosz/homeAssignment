@@ -145,6 +145,7 @@ timeLineUI <- function(id) {
     )
   )
 }
+
 timeLineServer <- function(id, varFilter) {
   #' Map module Server
   #' 

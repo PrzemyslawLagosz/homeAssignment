@@ -70,8 +70,7 @@ paste(replicate(37, "c"), collapse = "")
 
 
 
-
-
+### NOT IMPORTANT BELOW ###
 
 
 sqlite_file <- "example2.sqlite"
@@ -90,7 +89,6 @@ occurenceSQL <- read.csv.sql("C:\\Users\\Przemo\\Documents\\R\\homeAssignment\\m
 
 
   
-### NOT IMPORTANT ###
 occurencePL <- bothdfs
 occurenceLite <- read_csv("C:\\Users\\Przemo\\Documents\\R\\home-assignment\\data\\biodiversity-data\\occurence.csv", 
                     n_max = 10000, 
@@ -105,5 +103,4 @@ occurence <- read_csv("occurenceLite.csv")
 
 
 x <- dbGetQuery(db, "select * from miasto where name LIKE 'A%'")
-
 
