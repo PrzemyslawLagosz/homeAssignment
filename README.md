@@ -40,4 +40,10 @@ Unfortunetlly it can't handle a *NA* values. I couldn't implement solution prese
 In another approach I tried to read file in chunks with a loop presented in [sql.R](https://github.com/PrzemyslawLagosz/homeAssignment/blob/main/sql.R) file, and filter it, but met a problem with a memory buffer.  
 Additionally, loop somehow corrupted all data types, changing them to the character type.
 
+# Update 12.05.2022
 
+Data problem solution:
+* I created data base with SQLite, containing table occurence with all the data.
+* Read required data with help of `RSQLite` library. (solution in [sql.R](https://github.com/PrzemyslawLagosz/homeAssignment/blob/main/sql.R))
+* Changed data type of eventDate to Date type in R because SQLite DB can't handle DATE type.
+* Save as occurencePLDB.csv
