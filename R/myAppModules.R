@@ -18,7 +18,7 @@ selectUI <- function(id) {
 selectServer <- function(id) {
   #' Select module Server
   #'
-  #' It check with index is actually selected, and update each others to display position with same position
+  #' It check with index is actually selected, and update each others to display position with same index
   #' 
   #' @return Returns currently selected vernacularName as a reactive value
    

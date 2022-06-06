@@ -10,7 +10,7 @@ choicesDF <- occurence %>%
 
 NA_values_indexs <- which(is.na(choicesDF$vernacularName))
 
-choicesDF[NA_values_indexs,]$vernacularName <- paste0(choicesDF[NA_values_indexs,]$scientificName, "_equivalent")
+choicesDF[NA_values_indexs, ]$vernacularName <- paste0(choicesDF[NA_values_indexs, ]$scientificName, "_equivalent")
 
 #####
 
